@@ -1,0 +1,10 @@
+tunnel: 9c1327d5-b095-45ef-b7dd-8af32e04eeb4
+credentials-file: C:\Users\Tong Chen\.cloudflared\9c1327d5-b095-45ef-b7dd-8af32e04eeb4.json
+
+ingress:
+  # Route traffic for the API subdomain to your local Python server
+  - hostname: api.drtongc.space
+    service: http://localhost:5000
+    
+  # Catch-all rule: ensures the tunnel doesn't hang if an unexpected request comes in
+  - service: http_status:404
