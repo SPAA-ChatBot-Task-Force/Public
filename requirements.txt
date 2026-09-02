@@ -1,0 +1,70 @@
+# ============================================================
+# SPAA Chatbot - Python Package Requirements
+# Install all packages with:
+# pip3 install -r requirements.txt
+# ============================================================
+
+
+# --- LangChain: Core AI & RAG Framework ---
+
+# Core LangChain components used for prompts, documents,
+# and connecting different parts of the chatbot pipeline.
+langchain-core
+
+# Connects LangChain with locally running Ollama models.
+# Used to run the Qwen3 language model and the
+# nomic-embed-text embedding model.
+langchain-ollama
+
+# Connects LangChain with the Chroma vector database.
+# Used to store and retrieve document embeddings for RAG.
+langchain-chroma
+
+# Splits long documents into smaller overlapping chunks
+# before they are converted into embeddings and stored.
+langchain-text-splitters
+
+# Additional LangChain integrations and utilities.
+langchain-community
+
+
+# --- Search & Retrieval ---
+
+# Provides BM25 keyword-based search.
+# The chatbot combines BM25 keyword retrieval with
+# Chroma semantic retrieval to improve search accuracy.
+rank-bm25
+
+
+# --- Data Processing ---
+
+# Used for working with structured/tabular data.
+# Helpful for data processing, testing, and exporting results.
+pandas
+
+# Creates progress bars for longer operations.
+# Used when checking and adding document chunks to Chroma.
+tqdm
+
+# Reads and extracts text from PDF files.
+# Useful when preparing PDF documents for the chatbot database.
+pypdf
+
+# Reads and extracts text from Word files.
+python-docx
+
+# --- Web Server & API ---
+
+# Provides the local web server and API endpoints
+# (e.g., /chat and /chat_rag) used by the chatbot interface.
+flask
+
+# Allows the chatbot webpage to communicate with the
+# Flask API when they are hosted on different origins.
+flask-cors
+
+# Provides data validation and structured data models.
+# Also used internally by several AI/LangChain components.
+pydantic
+
+#

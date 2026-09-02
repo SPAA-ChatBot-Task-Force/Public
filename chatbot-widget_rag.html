@@ -160,7 +160,7 @@
 </div>
 
 <script>
-    const API_ENDPOINT = 'https://api.drtongc.space/chat_rag';
+    const API_ENDPOINT = 'https://api.spaarkly.online/chat_rag';
 
     // 1. Session Management
     let session_id = localStorage.getItem("spaa_rag_session_id") || crypto.randomUUID();
@@ -231,18 +231,38 @@
             });
 
             const data = await response.json();
+
+            // Also catch HTTP errors such as 400, 404, 500
+            if (!response.ok) {
+                throw new Error(data.error || `Server error: ${response.status}`);
+            }
+
             const answer = data.answer;
 
-            // Update thinking message with actual answer
-            thinkingMsg.innerHTML = formatBotMessage(answer);
+            // Stop loading-message updates
             thinkingMsg.classList.remove('thinking');
 
-            conversationContext += `\nUser: ${question}\nAssistant: ${data.raw_text}`;
+            // Display actual answer
+            thinkingMsg.innerHTML = formatBotMessage(answer);
+
+            conversationContext +=
+                `\nUser: ${question}\nAssistant: ${data.raw_text}`;
 
         } catch (error) {
+
+            // Stop loading-message updates
+            thinkingMsg.classList.remove('thinking');
+
             thinkingMsg.textContent = "Error: Unable to reach server.";
             thinkingMsg.style.color = "red";
+
+            console.error("Chat request failed:", error);
+
         } finally {
+
+            // Cancel any loading timers that have not fired yet
+            loadingTimers.forEach(timer => clearTimeout(timer));
+
             scrollContainer.scrollTop = scrollContainer.scrollHeight;
         }
     }
